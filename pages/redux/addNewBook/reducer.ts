@@ -1,4 +1,4 @@
-import { ADD_NEW_BOOK, UPDATE_BOOK } from "./actionType";
+import { ADD_NEW_BOOK, FREE_BOOK, UPDATE_BOOK } from "./actionType";
 import { InitialStateNewBook } from "./InitialStateNewBook";
 import { IAction } from "./type";
 
@@ -21,15 +21,24 @@ export const addNewBookReducer = (
       };
     case UPDATE_BOOK:
       return {
-        ...state,
         id: payload.book.id,
         name: payload.book.name,
         author: payload.book.author,
         thumbnail: payload.book.thumbnail,
         price: Number(payload.book.price),
         rating: Number(payload.book.rating),
+        featured: payload.book.featured,
       };
-
+    case FREE_BOOK:
+      return {
+        id: 0,
+        name: "",
+        author: "",
+        thumbnail: "",
+        price: "",
+        rating: "",
+        featured: "",
+      };
     default:
       return { ...state };
   }

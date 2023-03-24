@@ -1,7 +1,8 @@
 import React, { useEffect, useId, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { IInitialStateNewBook } from "../redux/addNewBook/type";
-import { addBook } from "../redux/BookList/action";
+import { addBook, updateBook } from "../redux/BookList/action";
+import { freeBook } from "../redux/addNewBook/action";
 
 const initialBookForm = {
   id: 0,
@@ -17,9 +18,11 @@ const NewBookForm = () => {
   const dispatch = useAppDispatch();
   const [bookForm, setBookForm] =
     useState<IInitialStateNewBook>(initialBookForm);
+
   useEffect(() => {
     setBookForm(book);
   }, [book]);
+
   const formHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setBookForm({
       ...bookForm,
@@ -32,8 +35,13 @@ const NewBookForm = () => {
   const formSubmitHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    dispatch<any>(addBook(bookForm));
-    setBookForm(initialBookForm);
+    if (bookForm.id == 0) {
+      dispatch<any>(addBook(bookForm));
+      setBookForm(initialBookForm);
+    } else if (bookForm!.id! !== 0) {
+      dispatch<any>(updateBook(bookForm!.id!, bookForm));
+      dispatch<any>(freeBook());
+    }
   };
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
@@ -114,8 +122,9 @@ const NewBookForm = () => {
             type="checkbox"
             name="featured"
             className="w-4 h-4"
+            checked={bookForm.featured}
             onChange={formHandler}
-            checked={bookForm.featured === true}
+            defaultChecked={bookForm.featured}
           />
           <label htmlFor="featured" className="ml-2 text-sm">
             {" "}

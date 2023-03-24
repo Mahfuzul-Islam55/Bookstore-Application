@@ -48,11 +48,12 @@ const BookList = () => {
           </div>
         </div>
         <div className="lws-bookContainer">
-          {!featuredBook
+          {!featuredBook && allBook.length > 0
             ? allBook.map((book: IInitialState) => {
                 return <Book book={book} key={book.id} />;
               })
-            : featured.map((book: IInitialState) => {
+            : featured.length > 0 &&
+              featured.map((book: IInitialState) => {
                 return <Book book={book} key={book.id} />;
               })}
         </div>

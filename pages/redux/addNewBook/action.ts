@@ -1,4 +1,4 @@
-import { ADD_NEW_BOOK, UPDATE_BOOK } from "./actionType";
+import { ADD_NEW_BOOK, FREE_BOOK, UPDATE_BOOK } from "./actionType";
 import { IInitialStateNewBook } from "./type";
 
 export const addNewBook = (book: IInitialStateNewBook) => {
@@ -16,5 +16,12 @@ export const updateBook = (book: IInitialStateNewBook) => {
     payload: {
       book: book,
     },
+  };
+};
+
+export const freeBook = () => {
+  return {
+    type: FREE_BOOK,
+    payload: {},
   };
 };
