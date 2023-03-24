@@ -12,9 +12,10 @@ export const addNewBookReducer = (
       const { book } = payload;
       return {
         ...state,
+        id: book.id,
         name: book.name,
         author: book.author,
-        url: book.url,
+        url: book.thumbnail,
         price: Number(book.price),
         rating: Number(book.rating),
       };

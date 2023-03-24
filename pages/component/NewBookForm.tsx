@@ -1,10 +1,30 @@
-import React from "react";
-
+import React, { useId, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { IInitialStateNewBook } from "../redux/addNewBook/type";
+import { addBook } from "../redux/BookList/action";
 const NewBookForm = () => {
+  const book = useAppSelector((state) => state.newBook);
+  const dispatch = useAppDispatch();
+  const [bookForm, setBookForm] = useState<IInitialStateNewBook>(book);
+
+  const formHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    setBookForm({
+      ...bookForm,
+      [e.currentTarget.name]:
+        e.currentTarget.type === "checkbox"
+          ? e.currentTarget.checked
+          : e.currentTarget.value,
+    });
+  };
+  const formSubmitHandler = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    dispatch<any>(addBook(bookForm));
+  };
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
       <h4 className="mb-8 text-xl font-bold text-center">Add New Book</h4>
-      <form className="book-form">
+      <form className="book-form" onSubmit={formSubmitHandler}>
         <div className="space-y-2">
           <label htmlFor="name">Book Name</label>
           <input
@@ -13,6 +33,8 @@ const NewBookForm = () => {
             type="text"
             id="input-Bookname"
             name="name"
+            value={bookForm.name}
+            onChange={formHandler}
           />
         </div>
 
@@ -24,6 +46,8 @@ const NewBookForm = () => {
             type="text"
             id="input-Bookauthor"
             name="author"
+            value={bookForm.author}
+            onChange={formHandler}
           />
         </div>
 
@@ -35,6 +59,8 @@ const NewBookForm = () => {
             type="text"
             id="input-Bookthumbnail"
             name="thumbnail"
+            value={bookForm.thumbnail}
+            onChange={formHandler}
           />
         </div>
 
@@ -47,6 +73,8 @@ const NewBookForm = () => {
               type="number"
               id="input-Bookprice"
               name="price"
+              value={bookForm.price}
+              onChange={formHandler}
             />
           </div>
 
@@ -60,6 +88,8 @@ const NewBookForm = () => {
               name="rating"
               min="1"
               max="5"
+              value={bookForm.rating}
+              onChange={formHandler}
             />
           </div>
         </div>
@@ -70,6 +100,8 @@ const NewBookForm = () => {
             type="checkbox"
             name="featured"
             className="w-4 h-4"
+            onChange={formHandler}
+            checked={bookForm.featured === true}
           />
           <label htmlFor="featured" className="ml-2 text-sm">
             {" "}

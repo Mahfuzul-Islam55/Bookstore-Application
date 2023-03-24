@@ -4,7 +4,8 @@ export const InitialStateNewBook: IInitialStateNewBook = {
   id: 0,
   name: "",
   author: "",
-  url: "",
+  thumbnail: "",
   price: 0,
   rating: 0,
+  featured: false,
 };

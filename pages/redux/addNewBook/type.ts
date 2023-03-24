@@ -2,9 +2,10 @@ export interface IInitialStateNewBook {
   id?: number;
   name: string;
   author: string;
-  url: string;
+  thumbnail: string;
   price: number;
   rating: number;
+  featured: boolean;
 }
 
 export interface IAction {
