@@ -1,5 +1,7 @@
 import React from "react";
+import { deleteBook } from "../redux/BookList/action";
 import { IInitialState } from "../redux/BookList/InitialState";
+import { useAppDispatch } from "../redux/store";
 
 interface props {
   book: IInitialState;
@@ -19,7 +21,7 @@ const Star = () => {
 
 const Book = ({ book }: props) => {
   const { name, id, thumbnail, price, rating, featured, author } = book;
-
+  const dispatch = useAppDispatch();
   const numberOfStars = () => {
     let stars = [];
     for (let i = 0; i < rating; i++) {
@@ -28,6 +30,9 @@ const Book = ({ book }: props) => {
     return stars;
   };
 
+  const deleteHandle = () => {
+    dispatch<any>(deleteBook(id));
+  };
   return (
     <div>
       <div>
@@ -64,7 +69,7 @@ const Book = ({ book }: props) => {
                     />
                   </svg>
                 </button>
-                <button className="lws-delete">
+                <button className="lws-delete" onClick={deleteHandle}>
                   <svg
                     fill="none"
                     viewBox="0 0 24 24"
@@ -88,39 +93,6 @@ const Book = ({ book }: props) => {
               <div className="lws-stars">
                 {}
                 {numberOfStars()}
-                {/* <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="lws-star"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clip-rule="evenodd"
-                  />
-                </svg> */}
-                {/* <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="lws-star"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="lws-star"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clip-rule="evenodd"
-                  />
-                </svg> */}
               </div>
               <p className="lws-price">BDT {price}</p>
             </div>

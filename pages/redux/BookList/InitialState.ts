@@ -18,5 +18,5 @@ export interface IAction {
 export interface IPayload {
   id?: number;
   book?: IInitialState;
-  bookList: object;
+  bookList?: object;
 }

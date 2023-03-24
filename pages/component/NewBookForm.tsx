@@ -20,6 +20,7 @@ const NewBookForm = () => {
     e.preventDefault();
 
     dispatch<any>(addBook(bookForm));
+    // setBookForm(book)
   };
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">

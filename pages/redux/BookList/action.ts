@@ -1,7 +1,11 @@
 import { Dispatch } from "redux";
 import { IInitialStateNewBook } from "../addNewBook/type";
-import { IDispathAddBookType, IDispathType } from "./reduxType";
-import { ADD_BOOK, GET_ALL_BOOKS } from "./type";
+import {
+  IDispatchDeleteBookType,
+  IDispathAddBookType,
+  IDispathType,
+} from "./reduxType";
+import { ADD_BOOK, DELETE_BOOK, GET_ALL_BOOKS } from "./type";
 
 export const getAllBook = async (dispatch: Dispatch<IDispathType>) => {
   try {
@@ -34,6 +38,23 @@ export const addBook = (bookForm: IInitialStateNewBook) => {
         type: ADD_BOOK,
         payload: {
           bookList: book,
+        },
+      });
+    } catch (error) {}
+  };
+};
+
+export const deleteBook = (id: number) => {
+  return async (dispatch: Dispatch<IDispatchDeleteBookType>) => {
+    try {
+      const response = await fetch(`http://localhost:9000/books/${id}`, {
+        method: "DELETE",
+      });
+
+      dispatch({
+        type: DELETE_BOOK,
+        payload: {
+          id: id,
         },
       });
     } catch (error) {}
