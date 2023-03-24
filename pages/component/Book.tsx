@@ -1,4 +1,5 @@
 import React from "react";
+import { updateBook } from "../redux/addNewBook/action";
 import { deleteBook } from "../redux/BookList/action";
 import { IInitialState } from "../redux/BookList/InitialState";
 import { useAppDispatch } from "../redux/store";
@@ -33,6 +34,9 @@ const Book = ({ book }: props) => {
   const deleteHandle = () => {
     dispatch<any>(deleteBook(id));
   };
+  const editBookHandle = () => {
+    dispatch(updateBook(book));
+  };
   return (
     <div>
       <div>
@@ -54,7 +58,7 @@ const Book = ({ book }: props) => {
                 ></span>
               )}
               <div className="text-gray-500 space-x-2">
-                <button className="lws-edit">
+                <button className="lws-edit" onClick={editBookHandle}>
                   <svg
                     fill="none"
                     viewBox="0 0 24 24"

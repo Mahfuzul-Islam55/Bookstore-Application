@@ -1,9 +1,18 @@
-import { ADD_NEW_BOOK } from "./actionType";
+import { ADD_NEW_BOOK, UPDATE_BOOK } from "./actionType";
 import { IInitialStateNewBook } from "./type";
 
 export const addNewBook = (book: IInitialStateNewBook) => {
   return {
     type: ADD_NEW_BOOK,
+    payload: {
+      book: book,
+    },
+  };
+};
+
+export const updateBook = (book: IInitialStateNewBook) => {
+  return {
+    type: UPDATE_BOOK,
     payload: {
       book: book,
     },

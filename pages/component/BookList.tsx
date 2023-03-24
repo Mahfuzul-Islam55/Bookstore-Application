@@ -25,35 +25,37 @@ const BookList = () => {
     setFeaturedBook(false);
   };
   return (
-    <div className="order-2 xl:-order-1">
-      <div className="flex items-center justify-between mb-12">
-        <h4 className="mt-2 text-xl font-bold">Book List</h4>
+    <div>
+      <div className="order-2 xl:-order-1">
+        <div className="flex items-center justify-between mb-12">
+          <h4 className="mt-2 text-xl font-bold">Book List</h4>
 
-        <div className="flex items-center space-x-4">
-          <button
-            className="filter-btn active-filter"
-            id="lws-filterAll"
-            onClick={allBookHandle}
-          >
-            All
-          </button>
-          <button
-            className="filter-btn"
-            id="lws-filterFeatured"
-            onClick={featuredHandle}
-          >
-            Featured
-          </button>
+          <div className="flex items-center space-x-4">
+            <button
+              className="filter-btn active-filter"
+              id="lws-filterAll"
+              onClick={allBookHandle}
+            >
+              All
+            </button>
+            <button
+              className="filter-btn"
+              id="lws-filterFeatured"
+              onClick={featuredHandle}
+            >
+              Featured
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="lws-bookContainer">
-        {!featuredBook
-          ? allBook.map((book: IInitialState) => {
-              return <Book book={book} key={book.id} />;
-            })
-          : featured.map((book: IInitialState) => {
-              return <Book book={book} key={book.id} />;
-            })}
+        <div className="lws-bookContainer">
+          {!featuredBook
+            ? allBook.map((book: IInitialState) => {
+                return <Book book={book} key={book.id} />;
+              })
+            : featured.map((book: IInitialState) => {
+                return <Book book={book} key={book.id} />;
+              })}
+        </div>
       </div>
     </div>
   );

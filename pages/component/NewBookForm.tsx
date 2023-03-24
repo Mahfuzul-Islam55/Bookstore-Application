@@ -1,12 +1,25 @@
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { IInitialStateNewBook } from "../redux/addNewBook/type";
 import { addBook } from "../redux/BookList/action";
+
+const initialBookForm = {
+  id: 0,
+  name: "",
+  author: "",
+  thumbnail: "",
+  price: 0,
+  rating: 0,
+  featured: false,
+};
 const NewBookForm = () => {
   const book = useAppSelector((state) => state.newBook);
   const dispatch = useAppDispatch();
-  const [bookForm, setBookForm] = useState<IInitialStateNewBook>(book);
-
+  const [bookForm, setBookForm] =
+    useState<IInitialStateNewBook>(initialBookForm);
+  useEffect(() => {
+    setBookForm(book);
+  }, [book]);
   const formHandler = (e: React.FormEvent<HTMLInputElement>) => {
     setBookForm({
       ...bookForm,
@@ -20,7 +33,7 @@ const NewBookForm = () => {
     e.preventDefault();
 
     dispatch<any>(addBook(bookForm));
-    // setBookForm(book)
+    setBookForm(initialBookForm);
   };
   return (
     <div className="p-4 overflow-hidden bg-white shadow-cardShadow rounded-md">
@@ -109,10 +122,15 @@ const NewBookForm = () => {
             This is a featured book{" "}
           </label>
         </div>
-
-        <button type="submit" className="submit" id="submit">
-          Add Book
-        </button>
+        {bookForm.id !== 0 ? (
+          <button type="submit" className="submit" id="submit">
+            Update Book
+          </button>
+        ) : (
+          <button type="submit" className="submit" id="submit">
+            Add Book
+          </button>
+        )}
       </form>
     </div>
   );
