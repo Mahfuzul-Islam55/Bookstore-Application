@@ -1,11 +1,18 @@
-import { IAction, InitialState } from "./InitialState";
+import { IAction, IInitialState, InitialState } from "./InitialState";
 import {
   IDispatchDeleteBookType,
+  IDispatchSearchBookType,
   IDispatchUpdateBookType,
   IDispathAddBookType,
   IDispathType,
 } from "./reduxType";
-import { ADD_BOOK, DELETE_BOOK, GET_ALL_BOOKS, UPDATE_BOOK } from "./type";
+import {
+  ADD_BOOK,
+  DELETE_BOOK,
+  GET_ALL_BOOKS,
+  SEARCH_BOOK,
+  UPDATE_BOOK,
+} from "./type";
 
 export const reducer = (
   state = InitialState,
@@ -14,6 +21,7 @@ export const reducer = (
     | IDispathAddBookType
     | IDispatchDeleteBookType
     | IDispatchUpdateBookType
+    | IDispatchSearchBookType
 ) => {
   const { type, payload } = action;
   switch (type) {
@@ -24,7 +32,6 @@ export const reducer = (
     case DELETE_BOOK:
       return state.filter((book) => book.id !== payload.id);
     case UPDATE_BOOK:
-      //return [...state.filter((book) => book.id !== payload.id), payload.book];
       return state.map((book) => {
         if (book.id === payload.id) {
           return {
@@ -41,6 +48,10 @@ export const reducer = (
           ...book,
         };
       });
+    case SEARCH_BOOK:
+      return state.filter((book: IInitialState) =>
+        book.author.toLowerCase().includes(payload!.searchText!)
+      );
     default:
       return [...state];
   }

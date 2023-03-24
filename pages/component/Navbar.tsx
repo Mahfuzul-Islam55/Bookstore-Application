@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllBook, searchBook } from "../redux/BookList/action";
+import { useAppDispatch } from "../redux/store";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
+  const [search, setSearch] = useState<string>("");
+  const [debounced, setDebounce] = useState<string>(search);
+  const searchHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    setDebounce(e.currentTarget.value);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(debounced), 1000);
+    return () => clearTimeout(timer);
+  }, [debounced]);
+
+  useEffect(() => {
+    if (search !== "") {
+      dispatch<any>(searchBook(search));
+    } else {
+      dispatch<any>(getAllBook);
+    }
+  }, [search]);
+
   return (
     <nav className="py-4 2xl:px-6">
       <div className="container flex items-center justify-between">
@@ -36,6 +58,7 @@ const Navbar = () => {
               placeholder="Filter books..."
               className="search"
               id="lws-searchBook"
+              onChange={searchHandler}
             />
           </div>
         </form>

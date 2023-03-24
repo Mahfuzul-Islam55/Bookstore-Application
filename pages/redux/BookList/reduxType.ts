@@ -1,5 +1,11 @@
 import { IPayload } from "./InitialState";
-import { ADD_BOOK, DELETE_BOOK, GET_ALL_BOOKS, UPDATE_BOOK } from "./type";
+import {
+  ADD_BOOK,
+  DELETE_BOOK,
+  GET_ALL_BOOKS,
+  SEARCH_BOOK,
+  UPDATE_BOOK,
+} from "./type";
 
 export interface IDispathType {
   type: typeof GET_ALL_BOOKS;
@@ -18,5 +24,10 @@ export interface IDispatchDeleteBookType {
 
 export interface IDispatchUpdateBookType {
   type: typeof UPDATE_BOOK;
+  payload: IPayload;
+}
+
+export interface IDispatchSearchBookType {
+  type: typeof SEARCH_BOOK;
   payload: IPayload;
 }

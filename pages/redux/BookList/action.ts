@@ -2,11 +2,18 @@ import { Dispatch } from "redux";
 import { IInitialStateNewBook } from "../addNewBook/type";
 import {
   IDispatchDeleteBookType,
+  IDispatchSearchBookType,
   IDispatchUpdateBookType,
   IDispathAddBookType,
   IDispathType,
 } from "./reduxType";
-import { ADD_BOOK, DELETE_BOOK, GET_ALL_BOOKS, UPDATE_BOOK } from "./type";
+import {
+  ADD_BOOK,
+  DELETE_BOOK,
+  GET_ALL_BOOKS,
+  SEARCH_BOOK,
+  UPDATE_BOOK,
+} from "./type";
 
 export const getAllBook = async (dispatch: Dispatch<IDispathType>) => {
   try {
@@ -86,3 +93,13 @@ export const updateBook = (id: number, bookForm: IInitialStateNewBook) => {
     }
   };
 };
+
+export const searchBook =
+  (text: string) => (dispatch: Dispatch<IDispatchSearchBookType>) => {
+    dispatch({
+      type: SEARCH_BOOK,
+      payload: {
+        searchText: text,
+      },
+    });
+  };

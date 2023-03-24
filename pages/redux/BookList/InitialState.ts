@@ -19,4 +19,5 @@ export interface IPayload {
   id?: number;
   book?: IInitialState;
   bookList?: object;
+  searchText?: string;
 }

@@ -12,6 +12,12 @@ const BookList = () => {
   const featured = allBook.filter(
     (book: IInitialState) => book.featured === true
   );
+
+  const searchList = allBook.filter((book: IInitialState) =>
+    book.author.toLowerCase().includes("mi")
+  );
+
+  console.log(searchList);
   console.log(featured);
   useEffect(() => {
     dispatch<any>(getAllBook);
