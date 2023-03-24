@@ -1,31 +1,53 @@
 import React from "react";
+import { IInitialState } from "../redux/BookList/InitialState";
 
-const Book = () => {
+interface props {
+  book: IInitialState;
+}
+
+const Star = () => {
   return (
-    <div className="order-2 xl:-order-1">
-      <div className="flex items-center justify-between mb-12">
-        <h4 className="mt-2 text-xl font-bold">Book List</h4>
+    <svg viewBox="0 0 20 20" fill="currentColor" className="lws-star">
+      <path
+        fill-rule="evenodd"
+        d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+        clip-rule="evenodd"
+      />
+    </svg>
+  );
+};
 
-        <div className="flex items-center space-x-4">
-          <button className="filter-btn active-filter" id="lws-filterAll">
-            All
-          </button>
-          <button className="filter-btn" id="lws-filterFeatured">
-            Featured
-          </button>
-        </div>
-      </div>
-      <div className="lws-bookContainer">
+const Book = ({ book }: props) => {
+  const { name, id, thumbnail, price, rating, featured, author } = book;
+
+  const numberOfStars = () => {
+    let stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(<Star key={i} />);
+    }
+    return stars;
+  };
+
+  return (
+    <div>
+      <div>
         {/* <!-- Card 1 --> */}
         <div className="book-card">
           <img
             className="h-[240px] w-[170px] object-cover lws-bookThumbnail"
-            src="https://m.media-amazon.com/images/P/B07DZ86WP7.01._SCLZZZZZZZ_SX500_.jpg"
+            src={thumbnail}
             alt="book"
           />
           <div className="flex-1 h-full pr-2 pt-2 flex flex-col">
             <div className="flex items-center justify-between">
-              <span className="badge-success lws-Badge">featured</span>
+              {featured ? (
+                <span className="badge-success lws-Badge">featured</span>
+              ) : (
+                <span
+                  className="badge-success lws-Badge"
+                  style={{ display: "hidden" }}
+                ></span>
+              )}
               <div className="text-gray-500 space-x-2">
                 <button className="lws-edit">
                   <svg
@@ -61,12 +83,23 @@ const Book = () => {
             </div>
 
             <div className="space-y-2 mt-4 h-full">
-              <h4 className="lws-bookName">
-                Life Hurts: A Doctor's Personal Journey Through Anorexia
-              </h4>
-              <p className="lws-author">Dr Elizabeth McNaught</p>
+              <h4 className="lws-bookName">{name}</h4>
+              <p className="lws-author">{author}</p>
               <div className="lws-stars">
-                <svg
+                {}
+                {numberOfStars()}
+                {/* <svg
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="lws-star"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
+                    clip-rule="evenodd"
+                  />
+                </svg> */}
+                {/* <svg
                   viewBox="0 0 20 20"
                   fill="currentColor"
                   className="lws-star"
@@ -87,20 +120,9 @@ const Book = () => {
                     d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
                     clip-rule="evenodd"
                   />
-                </svg>
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="lws-star"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                </svg> */}
               </div>
-              <p className="lws-price">BDT 14</p>
+              <p className="lws-price">BDT {price}</p>
             </div>
           </div>
         </div>
