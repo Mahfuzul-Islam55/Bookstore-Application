@@ -124,7 +124,6 @@ const NewBookForm = () => {
             className="w-4 h-4"
             checked={bookForm.featured}
             onChange={formHandler}
-            defaultChecked={bookForm.featured}
           />
           <label htmlFor="featured" className="ml-2 text-sm">
             {" "}

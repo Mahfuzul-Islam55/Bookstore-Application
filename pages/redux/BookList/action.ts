@@ -31,7 +31,6 @@ export const getAllBook = async (dispatch: Dispatch<IDispathType>) => {
 };
 
 export const addBook = (bookForm: IInitialStateNewBook) => {
-  console.log("From action", bookForm);
   return async (dispatch: Dispatch<IDispathAddBookType>) => {
     try {
       const response = await fetch("http://localhost:9000/books", {
@@ -80,7 +79,6 @@ export const updateBook = (id: number, bookForm: IInitialStateNewBook) => {
         body: JSON.stringify(bookForm),
       });
       const book = await response.json();
-      console.log(book);
       dispatch({
         type: UPDATE_BOOK,
         payload: {

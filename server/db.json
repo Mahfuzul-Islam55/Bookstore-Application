@@ -37,12 +37,12 @@
       "featured": true
     },
     {
-      "id": 13,
-      "name": "The Last Thing He Told Me: A Novel ",
-      "author": "Laura ",
-      "thumbnail": "https://m.media-amazon.com/images/P/1501171348.01._SCLZZZZZZZ_SX500_.jpg",
-      "price": "17",
-      "rating": "3",
+      "id": 14,
+      "name": "Eloquent JavaScript, 3rd Edition",
+      "author": "Marijn Haverbeke",
+      "thumbnail": "https://m.media-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
+      "price": 50,
+      "rating": 3,
       "featured": false
     }
   ]
