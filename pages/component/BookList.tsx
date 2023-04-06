@@ -7,7 +7,9 @@ import Book from "./Book";
 
 const BookList = () => {
   const dispatch = useAppDispatch();
-  const allBook: any = useAppSelector((state) => state.bookList);
+  const allBook: readonly IInitialState[] = useAppSelector(
+    (state) => state.bookList
+  );
   const [featuredBook, setFeaturedBook] = useState(false);
   const featured = allBook.filter(
     (book: IInitialState) => book.featured === true
